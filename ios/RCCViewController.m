@@ -194,6 +194,15 @@ const NSInteger TRANSPARENT_NAVBAR_TAG = 78264803;
 
 -(void)setStyleOnAppearForViewController:(UIViewController*)viewController
 {
+    // JHEALY - Prevent flicker on route change by setting UIView background color 
+    NSString *screenColor = self.navigatorStyle[@"screenColor"];
+    if (screenColor)
+    {
+        UIColor *color = screenColor != (id)[NSNull null] ? [RCTConvert UIColor:screenColor] : nil;
+        viewController.view.backgroundColor = color;
+    }
+    // ->
+
     NSString *screenBackgroundColor = self.navigatorStyle[@"screenBackgroundColor"];
     if (screenBackgroundColor)
     {
